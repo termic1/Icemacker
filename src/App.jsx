@@ -75,8 +75,11 @@ export default function App(){
  <Card title="Overheat Protection" icon={ShieldAlert}><p className="help">Current safety sensor: <strong>{toF(s.oh)}</strong>. Current trip threshold: <strong>{toF(s.ohThresh)}</strong>. Changing this setting affects machine safety; only authorized operators should adjust it.</p><form className="formRow" onSubmit={e=>{e.preventDefault();const f=Number(threshold),c=(f-32)/1.8;if(!Number.isFinite(f)||c<30||c>120){setError('Enter a temperature between 86°F and 248°F.');return}if(window.confirm(`Set overheat trip threshold to ${f}°F?`))command('overheatthresh',Number(c.toFixed(2)))}}><input type="number" value={threshold} onChange={e=>setThreshold(e.target.value)} placeholder="Threshold in °F" min="86" max="248" required/><button type="submit" className="outline">Update threshold</button></form></Card>
  <Card title="Change Regular Settings Password" icon={KeyRound}><p className="help">The master password remains valid for recovery. The new regular password is saved for this device.</p><form className="loginForm" onSubmit={changePassword}><input type="password" autoComplete="new-password" minLength={8} maxLength={128} value={newPassword} onChange={e=>setNewPassword(e.target.value)} placeholder="New password (at least 8 characters)" required/><button type="submit" className="outline" disabled={!!busy}>Change Password</button></form></Card>
  <Card title="Maintenance Counters" icon={Activity}><div className="maintenance"><div><span>Completed cycles</span><strong>{s.cycles??0}</strong></div><div><span>Gear motor</span><strong>{fmt(s.gmSec)}</strong></div><div><span>Hot gas valve</span><strong>{fmt(s.hgSec)}</strong></div><div><span>Water pump</span><strong>{fmt(s.wpSec)}</strong></div><div><span>Cold gas valve</span><strong>{fmt(s.cgSec)}</strong></div><div><span>Powered-on days</span><strong>{s.onDays??0}</strong></div></div><p className="help">Counter reset is intentionally not exposed through the remote API. Use the controller's local maintenance interface.</p></Card>
- </>}
- </>
- <footer><CheckCircle2 size={15}/> A&V Refrigeration Ice Maker · Firmware {s.fw||'unknown'} · MQTT status updates every 5 seconds</footer>
- </main></div>
+  </>}
+  </>}
+  <footer>
+    <CheckCircle2 size={15}/>
+    A&V Refrigeration Ice Maker · Firmware {s.fw||'unknown'} · MQTT status updates every 5 seconds
+  </footer>
+  </main></div>
 }
