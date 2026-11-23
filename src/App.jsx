@@ -76,6 +76,7 @@ export default function App(){
  <Card title="Change Regular Settings Password" icon={KeyRound}><p className="help">The master password remains valid for recovery. The new regular password is saved for this device.</p><form className="loginForm" onSubmit={changePassword}><input type="password" autoComplete="new-password" minLength={8} maxLength={128} value={newPassword} onChange={e=>setNewPassword(e.target.value)} placeholder="New password (at least 8 characters)" required/><button type="submit" className="outline" disabled={!!busy}>Change Password</button></form></Card>
  <Card title="Maintenance Counters" icon={Activity}><div className="maintenance"><div><span>Completed cycles</span><strong>{s.cycles??0}</strong></div><div><span>Gear motor</span><strong>{fmt(s.gmSec)}</strong></div><div><span>Hot gas valve</span><strong>{fmt(s.hgSec)}</strong></div><div><span>Water pump</span><strong>{fmt(s.wpSec)}</strong></div><div><span>Cold gas valve</span><strong>{fmt(s.cgSec)}</strong></div><div><span>Powered-on days</span><strong>{s.onDays??0}</strong></div></div><p className="help">Counter reset is intentionally not exposed through the remote API. Use the controller's local maintenance interface.</p></Card>
  </>}
+ </>
  <footer><CheckCircle2 size={15}/> A&V Refrigeration Ice Maker · Firmware {s.fw||'unknown'} · MQTT status updates every 5 seconds</footer>
  </main></div>
 }
